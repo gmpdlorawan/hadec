@@ -25,7 +25,39 @@ FLoRa est distribué sous licence GPL ; ces extensions le sont aussi.
 | Réglages et calibration | `choisir_hysteresis.py`, `gamma.py`, `analyse_calibration.py` |
 | Étude en une dimension (sans simulateur) | `analyse_preliminaire.py` |
 
-## Étapes
+## Installation (Linux, une seule fois)
+
+Il faut d'abord installer OMNeT++ 6.2.0 et INET 4.6.0, puis placer ce dépôt à côté d'INET :
+
+```sh
+# Dépendances (Ubuntu / Debian)
+sudo apt install build-essential clang lld gdb bison flex perl python3 python3-pip libxml2-dev zlib1g-dev
+pip3 install numpy scipy matplotlib pandas
+
+# 1. OMNeT++ 6.2.0 (https://omnetpp.org, ou github.com/omnetpp/omnetpp/releases)
+tar xzf omnetpp-6.2.0-linux-x86_64.tgz && cd omnetpp-6.2.0
+source setenv
+./configure WITH_QTENV=no WITH_OSG=no     # sans interface graphique (suffisant pour les campagnes)
+make -j$(nproc) MODE=release
+cd ..
+
+# 2. INET 4.6.0 (github.com/inet-framework/inet/releases), dans un dossier nommé inet4.6
+tar xzf inet-4.6.0-src.tgz && mv inet4.6* inet4.6 2>/dev/null; cd inet4.6
+make makefiles && make -j$(nproc) MODE=release
+cd ..
+
+# 3. Ce dépôt, à côté d'inet4.6
+git clone https://github.com/gmpdlorawan/hadec.git
+cd hadec
+export INET_ROOT=../inet4.6
+make makefiles && make -j$(nproc) MODE=release
+```
+
+Arborescence attendue : `omnetpp-6.2.0/`, `inet4.6/` et `hadec/` dans le même dossier. À chaque nouveau terminal,
+recharger l'environnement avec `source <chemin>/omnetpp-6.2.0/setenv`. Sous Windows, utiliser WSL (Ubuntu) et suivre
+les mêmes étapes.
+
+## Étapes (après l'installation)
 
 ```sh
 # 0. Environnement
@@ -34,7 +66,7 @@ export INET_ROOT=<chemin d'INET 4.6>     # RELATIF à la racine du dépôt, par 
 #    (le Makefile de FLoRa ajoute « ../ » devant : un chemin absolu fait échouer la compilation ;
 #     run.sh accepte les deux formes)
 
-# 1. Compiler FLoRa et les extensions (depuis la racine du dépôt)
+# 1. Compiler FLoRa et les extensions (depuis la racine du dépôt ; déjà fait à l'installation)
 make makefiles && make MODE=release
 
 # 2. Traces : déjà fournies. Pour les régénérer (résultat identique octet pour octet) :
