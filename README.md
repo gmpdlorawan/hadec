@@ -2,7 +2,7 @@
 
 Auteur : Djièta Ouindé Abdoul Fatas BAMOGO (laboratoire LAMDI, Université Nazi BONI, Burkina Faso).
 
-Ce dépôt contient un simulateur de l'itinérance active LoRaWAN avec décision côté réseau (HADEC), construit comme une extension du simulateur FLoRa, dont la documentation d'origine suit. Présentation : [`simulations/hadec/LISEZMOI.md`](simulations/hadec/LISEZMOI.md) ; utilisation : [`simulations/hadec/REPRODUIRE.md`](simulations/hadec/REPRODUIRE.md).
+Ce dépôt contient un simulateur de l'itinérance active LoRaWAN avec décision côté réseau (HADEC), construit comme une extension du simulateur FLoRa/OMNET++, dont la documentation d'origine suit. Présentation : [`simulations/hadec/LISEZMOI.md`](simulations/hadec/LISEZMOI.md) ; utilisation : [`simulations/hadec/REPRODUIRE.md`](simulations/hadec/REPRODUIRE.md).
 
 ---
 
